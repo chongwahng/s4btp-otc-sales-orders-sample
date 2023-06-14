@@ -1,0 +1,62 @@
+###
+POST http://localhost:4004/api/RefreshForecastItems
+Content-Type: application/json
+
+{ 
+    "SalesOrderID": {
+        "Values": [
+            { "Low": "5260000002" },
+            { "Low": "5260000003" }  
+        ],
+        "Ranges": [
+            { "Low": "5260000001", "High": "5260000010" },
+            { "Low": "5260000023", "High": "5260000055" }  
+        ]                
+    },
+
+    "SalesDocumentType": {
+        "Values": [
+            { "Low": "1234" },
+            { "Low": "5678" }
+        ],
+        "Ranges": [
+            { "Low": "1234", "High": "5678" }
+        ]
+    },
+
+    "SalesOrganization": {
+        "Values": [
+            { "Low": "1234" },
+            { "Low": "5678" }
+        ],
+        "Ranges": [
+            { "Low": "1234", "High": "5678" }
+        ]
+    }
+}
+
+###
+POST http://localhost:4004/api/RefreshForecastItems
+Content-Type: application/json
+
+{ 
+    "SalesOrderID": {
+        "Ranges": [
+            { "Low": "5260000001", "High": "5260000010" },
+            { "Low": "5260000023", "High": "5260000055" }  
+        ]
+    }
+}
+
+###
+POST http://localhost:4004/api/RefreshForecastItems
+Content-Type: application/json
+
+{ 
+    "SalesOrderID": {
+        "Values": [
+            { "Low": "5260000002" },
+            { "Low": "5260000003" }  
+        ]
+    }
+}
