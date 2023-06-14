@@ -45,18 +45,13 @@ Content-Type: application/json
             { "Low": "5260000001", "High": "5260000010" },
             { "Low": "5260000023", "High": "5260000055" }  
         ]
-    }
+    },
+    "SalesDocumentType": { },
+    "SalesOrganization": { }
 }
 
 ###
 POST http://localhost:4004/api/RefreshForecastItems
 Content-Type: application/json
 
-{ 
-    "SalesOrderID": {
-        "Values": [
-            { "Low": "5260000002" },
-            { "Low": "5260000003" }  
-        ]
-    }
-}
+{ }

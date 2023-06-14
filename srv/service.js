@@ -18,150 +18,110 @@ module.exports = async function (srv) {
         let whereCondition = null
 
         try {
-            /* SalesOrderID Values */
-            if (req.data.SalesOrderID.Values && req.data.SalesOrderID.Values.length > 0) {
-                var row = 0
-                salesOrderIDValues = ''
-                for (let i of req.data.SalesOrderID.Values.entries()) {
-                    row += 1
-                    if (row === req.data.SalesOrderID.Values.length) {
-                        salesOrderIDValues = salesOrderIDValues + `SalesOrderID = '${i[1].Low}'`
-                    } else {
-                        salesOrderIDValues = salesOrderIDValues + `SalesOrderID = '${i[1].Low}' or `
+            if (req.data.SalesOrderID != null) {
+                // ==> SalesOrderID Values
+                if (Array.isArray(req.data.SalesOrderID.Values)) {
+                    var row = 0
+                    salesOrderIDValues = ''
+                    for (let i of req.data.SalesOrderID.Values.entries()) {
+                        row += 1
+                        salesOrderIDValues =
+                            row === req.data.SalesOrderID.Values.length ?
+                                `${salesOrderIDValues} SalesOrderID = '${i[1].Low}'` :
+                                `${salesOrderIDValues} SalesOrderID = '${i[1].Low}' or`
                     }
+                    whereSalesOrderID = whereSalesOrderID ? `${whereSalesOrderID} or ${salesOrderIDValues}` : salesOrderIDValues
                 }
-                if (whereSalesOrderID) {
-                    whereSalesOrderID = whereSalesOrderID + ` or ` + salesOrderIDValues
-                } else {
-                    whereSalesOrderID = salesOrderIDValues
-                }
-            }
 
-            /* SalesOrderID Ranges */
-            if (req.data.SalesOrderID.Ranges && req.data.SalesOrderID.Ranges.length > 0) {
-                var row = 0
-                salesOrderIDRanges = ''
-                for (let i of req.data.SalesOrderID.Ranges.entries()) {
-                    row += 1
-                    if (row === req.data.SalesOrderID.Ranges.length) {
-                        salesOrderIDRanges = salesOrderIDRanges + `( SalesOrderID >= '${i[1].Low}' and SalesOrderID <= '${i[1].High}' )`
-                    } else {
-                        salesOrderIDRanges = salesOrderIDRanges + `( SalesOrderID >= '${i[1].Low}' and SalesOrderID <= '${i[1].High}' ) or `
+                // ==> SalesOrderID Ranges
+                if (Array.isArray(req.data.SalesOrderID.Ranges)) {
+                    var row = 0
+                    salesOrderIDRanges = ''
+                    for (let i of req.data.SalesOrderID.Ranges.entries()) {
+                        row += 1
+                        salesOrderIDRanges =
+                            row === req.data.SalesOrderID.Ranges.length ?
+                                `${salesOrderIDRanges} ( SalesOrderID >= '${i[1].Low}' and SalesOrderID <= '${i[1].High}' )` :
+                                `${salesOrderIDRanges} ( SalesOrderID >= '${i[1].Low}' and SalesOrderID <= '${i[1].High}' ) or`
                     }
-                }
-                if (whereSalesOrderID) {
-                    whereSalesOrderID = whereSalesOrderID + ` or ` + salesOrderIDRanges
-                } else {
-                    whereSalesOrderID = salesOrderIDRanges
+                    whereSalesOrderID = whereSalesOrderID ? `${whereSalesOrderID} or ${salesOrderIDRanges}` : salesOrderIDRanges
                 }
             }
 
-            if (whereSalesOrderID) {
-                whereCondition = `( ${whereSalesOrderID} )`
-            }
-
-            /* SalesDocumentType Values */
-            if (req.data.SalesDocumentType.Values && req.data.SalesDocumentType.Values.length > 0) {
-                var row = 0
-                salesDocumentTypeValues = ''
-                for (let i of req.data.SalesDocumentType.Values.entries()) {
-                    row += 1
-                    if (row === req.data.SalesDocumentType.Values.length) {
-                        salesDocumentTypeValues = salesDocumentTypeValues + `SalesDocumentType = '${i[1].Low}'`
-                    } else {
-                        salesDocumentTypeValues = salesDocumentTypeValues + `SalesDocumentType = '${i[1].Low}' or `
+            if (req.data.SalesDocumentType != null) {
+                // ==> SalesDocumentType Values
+                if (Array.isArray(req.data.SalesDocumentType.Values)) {
+                    var row = 0
+                    salesDocumentTypeValues = ''
+                    for (let i of req.data.SalesDocumentType.Values.entries()) {
+                        row += 1
+                        salesDocumentTypeValues =
+                            row === req.data.SalesDocumentType.Values.length ?
+                                `${salesDocumentTypeValues} SalesDocumentType = '${i[1].Low}'` :
+                                `${salesDocumentTypeValues} SalesDocumentType = '${i[1].Low}' or`
                     }
+                    whereSalesDocumentType = whereSalesDocumentType ? `${whereSalesDocumentType} or ${salesDocumentTypeValues}` : salesDocumentTypeValues
                 }
-                if (whereSalesDocumentType) {
-                    whereSalesDocumentType = whereSalesDocumentType + ` or ` + salesDocumentTypeValues
-                } else {
-                    whereSalesDocumentType = salesDocumentTypeValues
-                }
-            }
 
-            /* SalesDocumentType Ranges */
-            if (req.data.SalesDocumentType.Ranges && req.data.SalesDocumentType.Ranges.length > 0) {
-                var row = 0
-                salesDocumentTypeRanges = ''
-                for (let i of req.data.SalesDocumentType.Ranges.entries()) {
-                    row += 1
-                    if (row === req.data.SalesDocumentType.Ranges.length) {
-                        salesDocumentTypeRanges = salesDocumentTypeRanges + `( SalesDocumentType >= '${i[1].Low}' and SalesDocumentType <= '${i[1].High}' )`
-                    } else {
-                        salesDocumentTypeRanges = salesDocumentTypeRanges + `( SalesDocumentType >= '${i[1].Low}' and SalesDocumentType <= '${i[1].High}' ) or `
+                // ==> SalesDocumentType Ranges 
+                if (Array.isArray(req.data.SalesDocumentType.Ranges)) {
+                    var row = 0
+                    salesDocumentTypeRanges = ''
+                    for (let i of req.data.SalesDocumentType.Ranges.entries()) {
+                        row += 1
+                        salesDocumentTypeRanges =
+                            row === req.data.SalesDocumentType.Ranges.length ?
+                                `${salesDocumentTypeRanges} ( SalesDocumentType >= '${i[1].Low}' and SalesDocumentType <= '${i[1].High}' )` :
+                                `${salesDocumentTypeRanges} ( SalesDocumentType >= '${i[1].Low}' and SalesDocumentType <= '${i[1].High}' ) or`
                     }
-                }
-                if (whereSalesDocumentType) {
-                    whereSalesDocumentType = whereSalesDocumentType + ` or ` + salesDocumentTypeRanges
-                } else {
-                    whereSalesDocumentType = salesDocumentTypeRanges
+                    whereSalesDocumentType = whereSalesDocumentType ? `${whereSalesDocumentType} or ${salesDocumentTypeRanges}` : salesDocumentTypeRanges
                 }
             }
 
-            if (whereSalesDocumentType) {
-                if (whereCondition) {
-                    whereCondition = whereCondition + ` and ` + `( ${whereSalesDocumentType} )`
-                } else {
-                    whereCondition = `( ${whereSalesDocumentType} )`
-                }
-            }
-
-            /* SalesOrganization Values */
-            if (req.data.SalesOrganization.Values && req.data.SalesOrganization.Values.length > 0) {
-                var row = 0
-                salesOrganizationValues = ''
-                for (let i of req.data.SalesOrganization.Values.entries()) {
-                    row += 1
-                    if (row === req.data.SalesOrganization.Values.length) {
-                        salesOrganizationValues = salesOrganizationValues + `SalesOrganization = '${i[1].Low}'`
-                    } else {
-                        salesOrganizationValues = salesOrganizationValues + `SalesOrganization = '${i[1].Low}' or `
+            if (req.data.SalesOrganization != null) {
+                // ==> SalesOrganization Values 
+                if (Array.isArray(req.data.SalesOrganization.Values)) {
+                    var row = 0
+                    salesOrganizationValues = ''
+                    for (let i of req.data.SalesOrganization.Values.entries()) {
+                        row += 1
+                        salesOrganizationValues =
+                            row === req.data.SalesOrganization.Values.length ?
+                                `${salesOrganizationValues} SalesOrganization = '${i[1].Low}'` :
+                                `${salesOrganizationValues} SalesOrganization = '${i[1].Low}' or`
                     }
+                    whereSalesOrganization = whereSalesOrganization ? `${whereSalesOrganization} or ${salesOrganizationValues}` : salesOrganizationValues
                 }
-                if (whereSalesOrganization) {
-                    whereSalesOrganization = whereSalesOrganization + ` or ` + salesOrganizationValues
-                } else {
-                    whereSalesOrganization = salesOrganizationValues
-                }
-            }
-
-            /* SalesOrganization Ranges */
-            if (req.data.SalesOrganization.Ranges && req.data.SalesOrganization.Ranges.length > 0) {
-                var row = 0
-                salesOrganizationRanges = ''
-                for (let i of req.data.SalesOrganization.Ranges.entries()) {
-                    row += 1
-                    if (row === req.data.SalesOrganization.Ranges.length) {
-                        salesOrganizationRanges = salesOrganizationRanges + `( SalesOrganization >= '${i[1].Low}' and SalesOrganization <= '${i[1].High}' )`
-                    } else {
-                        salesOrganizationRanges = salesOrganizationRanges + `( SalesOrganization >= '${i[1].Low}' and SalesOrganization <= '${i[1].High}' ) or `
+                // ==> SalesOrganization Ranges 
+                if (Array.isArray(req.data.SalesOrganization.Ranges)) {
+                    var row = 0
+                    salesOrganizationRanges = ''
+                    for (let i of req.data.SalesOrganization.Ranges.entries()) {
+                        row += 1
+                        salesOrganizationRanges =
+                            row === req.data.SalesOrganization.Ranges.length ?
+                                `${salesOrganizationRanges} ( SalesOrganization >= '${i[1].Low}' and SalesOrganization <= '${i[1].High}' )` :
+                                `${salesOrganizationRanges} ( SalesOrganization >= '${i[1].Low}' and SalesOrganization <= '${i[1].High}' ) or`
                     }
-                }
-                if (whereSalesOrganization) {
-                    whereSalesOrganization = whereSalesOrganization + ` or ` + salesOrganizationRanges
-                } else {
-                    whereSalesOrganization = salesOrganizationRanges
+                    whereSalesOrganization = whereSalesOrganization ? `${whereSalesOrganization} or ${salesOrganizationRanges}` : salesOrganizationRanges
                 }
             }
 
-            if (whereSalesOrganization) {
-                if (whereCondition) {
-                    whereCondition = whereCondition + ` and ` + `( ${whereSalesOrganization} )`
-                } else {
-                    whereCondition = `( ${whereSalesOrganization} )`
-                }
-            }
+            if (whereSalesOrderID) whereCondition = whereCondition ? `${whereCondition} and ( ${whereSalesOrderID} )` : `( ${whereSalesOrderID} )`
+            if (whereSalesDocumentType) whereCondition = whereCondition ? `${whereCondition} and ( ${whereSalesDocumentType} )` : `( ${whereSalesDocumentType} )`
+            if (whereSalesOrganization) whereCondition = whereCondition ? `${whereCondition} and ( ${whereSalesOrganization} )` : `( ${whereSalesOrganization} )`
 
             console.log(whereCondition)
 
-            const query =
-                SELECT("*")
-                    .from("YCNG_A_ForecastSchRefreshItems.YCNG_A_ForecastSchRefreshItems")
-                    .where(whereCondition)
+            if (whereCondition) {
+                const query =
+                    SELECT("*")
+                        .from("YCNG_A_ForecastSchRefreshItems.YCNG_A_ForecastSchRefreshItems")
+                        .where(whereCondition)
 
-            const result = await onPremSrv.run(query)
-            
-            return result
+                const result = await onPremSrv.run(query)
+                return result
+            }
         } catch (error) {
             console.log(`Error during data retrieval:${error.message}`)
         }
