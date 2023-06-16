@@ -8,7 +8,7 @@
   "dependencies": {
     "@sap-cloud-sdk/http-client": "^3.2.0",
     "@sap-cloud-sdk/util": "^3.2.0",
-    "@sap/cds": "^6.8.2",
+    "@sap/cds": "^6.8.3",
     "@sap/xssec": "^3",
     "express": "^4",
     "passport": "^0"
@@ -26,23 +26,23 @@
     "env": {
       "odata": {
         "protectMetadata": false
-      },
-      "requires": {
-        "auth": {
-          "restrict_all_services": false
-        }
       }
     },
     "requires": {
-      "YCNG_A_ForecastSchRefreshItems": {
-        "kind": "odata-v2",
-        "model": "srv/external/YAPI_FORECASTSCHREFRITM_O2",
-        "credentials": {
-          "path": "/sap/opu/odata/sap/YAPI_FORECASTSCHREFRITM_O2",
-          "destination": "S4HANA_PSD_HTTPS_505_Technical"
-        }
-      },
-      "auth": "xsuaa"
+      "auth": {
+        "restrict_all_services": false
+      }
+    }
+  },
+  "requires": {
+    "YCNG_A_ForecastSchRefreshItems": {
+      "kind": "odata-v2",
+      "model": "srv/external/YAPI_FORECASTSCHREFRITM_O2",
+      "credentials": {
+        "path": "/sap/opu/odata/sap/YAPI_FORECASTSCHREFRITM_O2",
+        "destination": "S4HANA_PSD_HTTPS_505_Technical"
+      }
     }
   }
+}
 }
