@@ -31,18 +31,15 @@
     "requires": {
       "auth": {
         "restrict_all_services": false
-      }
-    }
-  },
-  "requires": {
-    "YCNG_A_ForecastSchRefreshItems": {
-      "kind": "odata-v2",
-      "model": "srv/external/YAPI_FORECASTSCHREFRITM_O2",
-      "credentials": {
-        "path": "/sap/opu/odata/sap/YAPI_FORECASTSCHREFRITM_O2",
-        "destination": "S4HANA_PSD_HTTPS_505_Technical"
+      },
+      "YCNG_A_ForecastSchRefreshItems": {
+        "kind": "odata-v2",
+        "model": "srv/external/YAPI_FORECASTSCHREFRITM_O2",
+        "credentials": {
+          "path": "/sap/opu/odata/sap/YAPI_FORECASTSCHREFRITM_O2",
+          "destination": "S4HANA_PSD_HTTPS_505_Technical"
+        }
       }
     }
   }
-}
 }
